@@ -1,4 +1,8 @@
-import { Component, OnInit } from "@angular/core";
+import { AfterViewInit, Component, OnInit, ViewChild } from "@angular/core";
+import { FormControl, ReactiveFormsModule } from "@angular/forms";
+import { MatPaginator } from "@angular/material/paginator";
+import { MatTableDataSource } from "@angular/material/table";
+import { MatSort } from "@angular/material/sort";
 
 export interface PeriodicElement {
   name: string;
@@ -10,7 +14,7 @@ export interface PeriodicElement {
 const ELEMENT_DATA: PeriodicElement[] = [
   {
     position: 1,
-    name: "Hydrogesdfsdfsdfnsdfdfsfsqsfqsf15d",
+    name: "Hydrogesdfsdfsdfnsdfdfsfqsf8qsf86q4s68f4q68sf468q4sf86sqsfqsf15d",
     weight: 1.0079,
     symbol: "H"
   },
@@ -30,11 +34,80 @@ const ELEMENT_DATA: PeriodicElement[] = [
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.scss"]
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
+  // DATAS
   displayedColumns: string[] = ["position", "name", "weight", "symbol"];
-  dataSource = ELEMENT_DATA;
+  dataSource = new MatTableDataSource();
+  columnsToDisplay = ["position", "name", "weight", "symbol"];
 
-  constructor() {}
+  // FILTER SYSTEM
+  filterValues = {
+    position: "",
+    name: "",
+    symbol: "",
+    weight: ""
+  };
 
-  ngOnInit() {}
+  // SORT SYSTEM && PAGINATOR SYSTEM
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
+  constructor() {
+    this.dataSource.data = ELEMENT_DATA;
+
+    // FILTER SYSTEM
+    this.dataSource.filterPredicate = this.createFilter();
+  }
+
+  // FILTER SYSTEM
+  positionFilter = new FormControl("");
+  nameFilter = new FormControl("");
+  weightFilter = new FormControl("");
+  symbolFilter = new FormControl("");
+
+  ngOnInit() {
+    // FILTER SYSTEM
+    this.nameFilter.valueChanges.subscribe(name => {
+      this.filterValues.name = name;
+      this.dataSource.filter = JSON.stringify(this.filterValues);
+    });
+    this.positionFilter.valueChanges.subscribe(position => {
+      this.filterValues.position = position;
+      this.dataSource.filter = JSON.stringify(this.filterValues);
+    });
+    this.weightFilter.valueChanges.subscribe(weight => {
+      this.filterValues.weight = weight;
+      this.dataSource.filter = JSON.stringify(this.filterValues);
+    });
+    this.symbolFilter.valueChanges.subscribe(symbol => {
+      this.filterValues.symbol = symbol;
+      this.dataSource.filter = JSON.stringify(this.filterValues);
+    });
+  }
+
+  // FILTER SYSTEM
+  createFilter(): (data: any, filter: string) => boolean {
+    let filterFunction = function(data, filter): boolean {
+      let searchTerms = JSON.parse(filter);
+      return (
+        data.name.toLowerCase().indexOf(searchTerms.name.toLowerCase()) !==
+          -1 &&
+        data.position
+          .toString()
+          .toLowerCase()
+          .indexOf(searchTerms.position.toString().toLowerCase()) !== -1 &&
+        data.weight
+          .toString()
+          .toLowerCase()
+          .indexOf(searchTerms.weight.toString().toLowerCase()) !== -1 &&
+        data.symbol.toLowerCase().indexOf(searchTerms.symbol.toLowerCase()) !==
+          -1
+      );
+    };
+    return filterFunction;
+  }
 }

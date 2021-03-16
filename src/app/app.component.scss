@@ -1,5 +1,6 @@
 @import "../scss/mixins";
 
+// TOOLTIP CSS
 .truncate-cells {
   width: 100%;
   table-layout: fixed;
@@ -9,10 +10,27 @@
   }
 }
 
+.custom-tooltip {
+  font-size: 150px;
+}
+
+// FILTER CSS
+.filter {
+  display: block;
+}
+
+// SHORT PADDING ROWS
+
+.mat-row {
+  height: 25px;
+}
+
+// ALTERNATE COLOR CSS
+
 .mat-row:nth-child(even) {
   background-color: whitesmoke;
 }
 
 .mat-row:nth-child(odd) {
-  background-color: rgb(204, 203, 203);
+  background-color: rgb(200, 200, 200);
 }
