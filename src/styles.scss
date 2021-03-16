@@ -1,0 +1,98 @@
+@import './scss/utilities/fonts';
+@import './scss/mixins';
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$app-primary: mat-palette($mat-indigo);
+$app-accent: mat-palette($mat-pink, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$app-warn: mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($app-theme);
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+// Clearfix
+.clearfix {
+  @include clearfix;
+}
+
+/* Default Angular Material text color helper classes */
+.dark-primary-text {
+  color: $dark-primary-text;
+}
+
+.dark-secondary-text {
+  color: $dark-secondary-text;
+}
+
+.dark-disabled-text {
+  color: $dark-disabled-text;
+}
+
+.light-primary-text {
+  color: $light-primary-text;
+}
+
+.light-secondary-text {
+  color: $light-secondary-text;
+}
+
+.light-disabled-text {
+  color: $light-disabled-text;
+}
+
+// Two tone icon color fixes
+// Needs to be updated to use AM color palettes instead of hard coded
+
+ // Uses base button class to set all AM buttons to primary button color: #3f51b5
+.mat-button-base.mat-primary .material-icons-two-tone {
+  filter: invert(26%) sepia(52%) saturate(2125%) hue-rotate(215deg) brightness(93%) contrast(87%);
+}
+
+// Raised button override, making icons white
+.mat-raised-button.mat-primary .material-icons-two-tone,
+.mat-flat-button.mat-primary .material-icons-two-tone,
+.mat-fab.mat-primary .material-icons-two-tone,
+.mat-mini-fab.mat-primary .material-icons-two-tone {
+  filter: brightness(0) invert(1);  
+}
+
+// Uses base button class to set all AM buttons to accent button color: #ff4081
+.mat-button-base.mat-accent .material-icons-two-tone {
+  filter: invert(55%) sepia(55%) saturate(6746%) hue-rotate(316deg) brightness(100%) contrast(103%);
+}
+
+// Raised button override, making icons white
+.mat-raised-button.mat-accent .material-icons-two-tone,
+.mat-flat-button.mat-accent .material-icons-two-tone,
+.mat-fab.mat-accent .material-icons-two-tone,
+.mat-mini-fab.mat-accent .material-icons-two-tone {
+  filter: brightness(0) invert(1);
+}

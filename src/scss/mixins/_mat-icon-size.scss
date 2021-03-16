@@ -1,0 +1,24 @@
+// Angular Material icon sizes
+@mixin mat-icon-size($size: 24) {
+
+  @if type-of($size)==number {
+
+    @if map-has-key($icon-sizes, $size) {
+
+      font-size: map-get($icon-sizes, $size);
+      height: map-get($icon-sizes, $size);
+      width: map-get($icon-sizes, $size);
+      line-height: 1;
+
+    }
+
+    @else {
+      @error "No item named #{$size} exists. Available sizes are: #{map-keys($icon-sizes)}.";
+    }
+
+  }
+
+  @else {
+    @error "The `$height` parameter must be a number";
+  }
+}

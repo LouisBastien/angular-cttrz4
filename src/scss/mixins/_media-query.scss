@@ -1,0 +1,16 @@
+// Media queries
+@mixin media-query($breakpoint) {
+
+  @if map-has-key($breakpoints, $breakpoint) {
+
+    @media #{inspect(map-get($breakpoints, $breakpoint))} {
+      @content;
+    }
+
+  }
+
+  @else {
+    @error "No breakpoint named #{$breakpoint} exists. Available breakpoints are: #{map-keys($breakpoints)}.";
+  }
+
+}

@@ -1,0 +1,18 @@
+@import "../scss/mixins";
+
+.truncate-cells {
+  width: 100%;
+  table-layout: fixed;
+
+  .truncate {
+    @include text-truncate();
+  }
+}
+
+.mat-row:nth-child(even) {
+  background-color: whitesmoke;
+}
+
+.mat-row:nth-child(odd) {
+  background-color: rgb(204, 203, 203);
+}
