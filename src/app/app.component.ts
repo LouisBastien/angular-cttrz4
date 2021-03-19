@@ -3,6 +3,7 @@ import { FormControl, ReactiveFormsModule } from "@angular/forms";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatTableDataSource } from "@angular/material/table";
 import { MatSort } from "@angular/material/sort";
+import { CdkDragDrop, moveItemInArray } from "@angular/cdk/drag-drop";
 
 export interface PeriodicElement {
   name: string;
@@ -61,6 +62,14 @@ export class AppComponent implements OnInit, AfterViewInit {
 
     // FILTER SYSTEM
     this.dataSource.filterPredicate = this.createFilter();
+  }
+
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(
+      this.displayedColumns,
+      event.previousIndex,
+      event.currentIndex
+    );
   }
 
   // FILTER SYSTEM
