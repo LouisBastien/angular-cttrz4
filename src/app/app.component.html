@@ -89,8 +89,7 @@
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns" class="example-first-header-row"></tr>
-  <tr mat-header-row *matHeaderRowDef="['position-filter', 'name-filter', 'weight-filter', 'symbol-filter']"
-    class="second-first-header-row"></tr>
+  <tr mat-header-row *matHeaderRowDef="displayedFilters" class="second-first-header-row"></tr>
 
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>

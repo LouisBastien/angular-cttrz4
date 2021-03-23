@@ -39,7 +39,13 @@ export class AppComponent implements OnInit, AfterViewInit {
   // DATAS
   displayedColumns: string[] = ["position", "name", "weight", "symbol"];
   dataSource = new MatTableDataSource();
-  columnsToDisplay = ["position", "name", "weight", "symbol"];
+
+  displayedFilters: string[] = [
+    "position-filter",
+    "name-filter",
+    "weight-filter",
+    "symbol-filter"
+  ];
 
   // FILTER SYSTEM
   filterValues = {
@@ -67,6 +73,12 @@ export class AppComponent implements OnInit, AfterViewInit {
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(
       this.displayedColumns,
+      event.previousIndex,
+      event.currentIndex
+    );
+
+    moveItemInArray(
+      this.displayedFilters,
       event.previousIndex,
       event.currentIndex
     );
