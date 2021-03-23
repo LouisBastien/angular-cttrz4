@@ -47,10 +47,10 @@ import { MatTooltipModule } from "@angular/material/tooltip";
 import { MatTreeModule } from "@angular/material/tree";
 
 import { AppComponent } from "./app.component";
-import { CommonModule } from "@angular/common";
+import { ResizeColumnDirective } from "./resize-column.directive";
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, ResizeColumnDirective],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
